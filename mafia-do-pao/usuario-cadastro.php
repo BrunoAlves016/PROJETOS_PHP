@@ -39,7 +39,7 @@ if($_SERVER['REQUEST_METHOD'] =='POST'){
 </head>
 <body>
 <div class="container-global">
-    <a href="home.php" style="width: 50px; height: 50px; background-color: blue;">VOLTAR</a>
+    <a href="backoffice.php"><img src="icons/Navigation-left-01-256.png" width="16" height="16"></a>
         <form class="formulario" action="usuario-cadastro.php" method="post">
             <label>LOGIN</label>
             <input type="text" name="txtlogin" placeholder="DIGITE SEU LOGIN" required>

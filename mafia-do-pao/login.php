@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 include("conectadb.php");
 
 if($_SERVER['REQUEST_METHOD']=='POST'){
@@ -15,7 +17,14 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
 
     // VERIFICA SE NATAN EXISTE
     if($contagem == 1){
-        echo "<script>window.location.href='home.php';</script>";
+        $sql = "SELECT usu_id, usu_login FROM tb_usuarios WHERE usu_login = '$login' AND usu_senha = '$senha'";
+        $retorno = mysqli_query($link,$sql);
+        // RETORNANDO O NOME DO NATHAN + ID DELE
+        while($tbl = mysqli_fetch_array($retorno)){
+            $_SESSION ['idusuario'] = $tbl[0];
+            $_SESSION ['nomeusuario'] = $tbl[1];
+        }
+        echo "<script>window.location.href='backoffice.php';</script>";
     }
     else{
         echo "<script>window.alert('USUÁRIO OU SENHA INCORRETO');</script>";
@@ -37,7 +46,7 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
 <body>
     <div class="container-global">
         <form class="formulario" action="login.php" method="post">
-        <img src="img/logosemfundo.png" width=100px height=100px>
+            <img src="img/logosemfundo.png" width=100px height=100px>
             <label>LOGIN</label>
             <input type="text" name="txtlogin" placeholder="DIGITE SEU LOGIN" required>
             <br>
