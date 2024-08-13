@@ -1,5 +1,6 @@
 <?php
 include("conectadb.php");
+include('topo.php');
 
 if($_SERVER['REQUEST_METHOD'] =='POST'){
     $login = $_POST['txtlogin'];
@@ -39,18 +40,20 @@ if($_SERVER['REQUEST_METHOD'] =='POST'){
 </head>
 <body>
 <div class="container-global">
-    <a href="backoffice.php"><img src="icons/Navigation-left-01-256.png" width="25px" height="25px"></a>
         <form class="formulario" action="usuario-cadastro.php" method="post">
             <label>LOGIN</label>
             <input type="text" name="txtlogin" placeholder="DIGITE SEU LOGIN" required>
             <br>
+
             <label>SENHA</label>
             <input type="password" name="txtsenha" placeholder="DIGITE SUA SENHA" required>
             <br>
+
             <label>EMAIL</label>
             <input type="email" name="txtemail" placeholder="DIGITE SEU EMAIL" required>
             <br>
             <br>
+            
             <input type="submit" value="CRIAR">
         </form>
     </div>

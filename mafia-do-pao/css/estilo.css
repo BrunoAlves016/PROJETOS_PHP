@@ -120,7 +120,7 @@ body{
 
 
 /* AJUSTANDO TABELAS */
-.container-listausuarios {
+.container-listausuarios, .container-listaclientes {
     margin-top: 60px;
     display: flex;
     flex-flow: column;
@@ -129,12 +129,25 @@ body{
 
 }
 
+.container-listaclientes form{
+    margin-top: 5px;
+    display: flex;
+    justify-content: center;
+    flex-flow: row;
+    background-color: whitesmoke;
+    width: auto;
+    border-radius: 20px;
+    padding: 12px;
+}
 .lista{
+    display: flex;
+    flex-flow: row;
+    justify-content:center ;
     background-color: #0092ba;
     padding: 20px;
     border-radius: 10px;
     border-collapse: collapse;
-    width: 100%;
+    width: auto;
     height: auto;
     
 }
