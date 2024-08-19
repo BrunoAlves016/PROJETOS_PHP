@@ -50,12 +50,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 <body>
     <div class="container-global">
-        <form class="formulario" action="produto-cadastro.php" method="post">
-            <label>NOME PRODUTO</label>
+        <form class="formulario" action="produto-cadastro.php" method="post" enctype="multipart/form-data">
+            <label>NOME DO PRODUTO</label>
             <input type="text" name="txtproduto" placeholder="DIGITE SEU PRODUTO" required>
-            <br>
-            <label>IMAGEM</label>
-            <input type="file" name="imagem" id="imagem">
             <br>
 
             <label>QUANTIDADE</label>
@@ -73,6 +70,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
             <label>PREÇO</label>
             <input type="decimal" name="txtpreco" placeholder="DIGITE O PREÇO" required>
+            <br>
+
+            <label>IMAGEM</label>
+            <input type="file" name="imagem" id="imagem">
             <br>
             <input type="submit" value="CADASTRAR PRODUTO">
         </form>
