@@ -13,9 +13,44 @@ while($tbl = mysqli_fetch_array($retorno)) {
     $unidade = $tbl["3"];
     $preco = $tbl["4"];
     $status = $tbl["5"];
-    $imagem = $tbl["6"];
+    $imagem_atual = $tbl["6"];
 }
 
+//APERTAR BOTÃO DE ALTERAR
+if($_SERVER['REQUEST_METHOD'] == 'POST'){
+    $id = $_POST['id'];
+    $nomeproduto = $_POST['txtnome'];
+    $quantidade = $_POST['txtqtd'];
+    $unidade = $_POST['txtunidade'];
+    $preco = $_POST['txtpreco'];
+    $status = $_POST['status'];
+    $imagem = $_POST['image'];
+   
+    // AJUSTANDO IMAGEM PARA O BANCO
+    if(isset($_FILES['imagem']) && $_FILES['imagem']['error'] === UPLOAD_ERR_OK){
+      $imagem_temp = $_FILES['imagem']['tmp_name'];
+      $imagem = file_get_contents($imagem_temp);
+      // CRIPTOGRAFA IMAGEM EM BASE64
+      $imagem_base64 = base64_encode($imagem);
+  };
+
+  // VERIFICAR SE A IMAGEM QUE ESTÁ CHEGANDO É IGUAL QUE SERÁ GRAVADA
+
+  if($imagem_atual == $imagem_base64){
+    $sql = "UPDATE tb_produtos SET pro_nome = '$nomeproduto', pro_quantidade = $quantidade, pro_unidade = '$unidade', pro_preco = $preco, pro_status = '$status'";
+    mysqli_query($link, $sql);
+
+    echo"<script>window.alert('PRODUTO ALTERADO');</script>";
+    echo"<script>window.location.href='produto-lista.php';</script>";
+  }
+  else{
+    $sql = "UPDATE tb_produtos SET pro_nome = '$nomeproduto', pro_quantidade = $quantidade, pro_unidade = '$unidade', pro_preco = $preco, pro_status = '$status', pro_imagem = '$imagem_base64'";
+    mysqli_query($link, $sql);
+
+    echo"<script>window.alert('PRODUTO ALTERADO');</script>";
+    echo"<script>window.location.href='produto-lista.php';</script>";
+  }
+}  
 ?>
 
 
@@ -58,7 +93,7 @@ while($tbl = mysqli_fetch_array($retorno)) {
             <br>
 
             <label>IMAGEM</label>
-            <img src="data:image/jpeg;base64,<?= $imagem?>"width="120px" height="120px">
+            <img src="data:image/jpeg;base64,<?= $imagem_atual?>"width="120px" height="120px">
             <input type="file" name="imagem" value="<?=$imagem?>" id="imagem">
             <br>
             <div class="bullets">
